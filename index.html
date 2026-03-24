@@ -45,8 +45,10 @@ function redirect() {
 
   setTimeout(() => {
     if (!newTab || newTab.closed || typeof newTab.closed === "undefined") {
-      window.location.href = finalUrl;
-    } else {
+newTab.document.write(`
+  <title>Loading...</title>
+  <iframe src="${finalUrl}" style="position:fixed;top:0;left:0;width:100%;height:100%;border:none;"></iframe>
+`);    } else {
       newTab.location.href = finalUrl;
       setTimeout(() => {
         if (document.body.contains(loadingFrame)) {
